@@ -1,0 +1,70 @@
+{% extends "search.html" %}
+{% block title %}
+bookpage
+{% endblock %}
+
+{% block body %}
+<br>
+<div class='container bg-light row no-gutters'>
+    <h1 class='book-title'>{{book['title']}}</h1>
+    <h4 class="book-title">By {{book['author']}}</h4>
+    <br>
+    <h4 class="book-title">ISBN {{ book['isbn'] }}, published in {{ book['year']}}</h4>
+    <br>
+    <br>
+    <div class="scrollable-div">
+      {% if reviews %}
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">User</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Review</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%  for review in reviews %}
+          <tr>
+            <th scope="row">{{ loop.index}}</th>
+            <td>{{names[loop.index ==1] }}</td>
+            <td>
+            {% for i in range(review["stars"]) %}
+            <span class="fa fa-star checked"></span>
+            {% endfor %}
+
+            {% for i in range(5 - review["stars"]) %}
+            <span class="fa fa-star"></span>
+            {% endfor %}
+          </td>
+          <td>{{ review["comment"]}}</td>
+          <td>{{review["postdate"]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+    </div>
+    <br>
+
+    <form class='form-group ' action="{{url_for('review') }}" method="POST">
+        <label class='text-danger'>Write your review...</label>
+        <select name="stars" class='m-1' required>
+            <option selected value disabled> -- select rating -- </option>
+            <option value="1">1 star</option>
+            <option value="2">2 stars</option>
+            <option value="3">3 stars</option>
+            <option value="4">4 stars</option>
+            <option value="5">5 stars</option>
+        </select>
+        <textarea class='form-control' name='textarea'>
+        </textarea>
+        <button class="btn btn-lg btn-primary btn-block child inline-block-child submit-btn" type="submit" style="padding-top:4px;padding-bottom:4px;">Post</button>
+
+</form>
+</div>
+<!--<div class='bg-light text-center '><a href='/api/{{data.isbn}}'>API</a></div>-->
+
+{% endblock %}

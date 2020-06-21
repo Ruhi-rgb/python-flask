@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block title %}
+search Results
+{% endblock %}
+
+{% block body %}
+<table  class="table table-stripped">
+  <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">ISBN</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in books %}
+    <tr>
+      <th scope="row">{{ loop.search}}</th>
+      <td><form action="{{url_for('book', id=row.id) }}" method="post"><button type="submit" class="btn btn-link">{{ row["title"] }}</button></form></td>
+      <td><form action="{{url_for('search', search=row.author) }}" method="post"><button type="submit" class="btn btn-link">{{ row["author"] }}</button></form></td>
+      <td>{{row["isbn"]}}</td>
+    </tr>
+    {%endfor}
+  </tbody>
+</table>
+  <!--<h1 class="book-title">{{book['title']}}</h1>
+  <h4 class="book-title">By {{book['author']}}</h4>
+  <br>
+  <h4 class="book-title">ISBN {{book['isbn']}}, published in {{book['year']}} </h4>
+  <br><br>
+  <p class="book-title">Average rating on goodread is {{review['average_rating']}} ({{ review['work_ratings_count']}})</p>
+-->
+{% endblock %}
