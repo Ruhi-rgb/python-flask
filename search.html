@@ -1,0 +1,103 @@
+{% extends 'index.html' %}
+
+{% block header %}
+<h1>{% block title %}Search{% endblock %}</h1>
+{% endblock %}
+
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			background: url(https://image.freepik.com/free-photo/bible-wood_1150-17655.jpg);
+			background-size: cover;
+			font-family: sans-serif;
+		}
+
+h1{
+	margin: 0 0 10px;
+	padding: 0;
+	color: #fff;
+	font-size: 40px;
+}
+.box{
+	position: absolute;
+	top:25%;
+	left: 30%;
+	/*width: 500px;*/
+	transform: translate(-50%,-50%);
+}
+.box h2{
+	margin: 0 0 10px;
+	padding: 10;
+	color: #fff;
+	font-size: 40px;
+	}
+input{
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	box-sizing: border-box;
+
+
+}
+input[type="text"]
+{
+	background: #fff;
+	height: 50px;
+	border:none;
+	outline: none;
+	padding: 0 25px;
+	border-radius: 25px 5 5 50px;
+
+}
+input[type="submit"]
+{
+	position: relative;
+	left: -5px;
+	border-radius: 0 25px 25px 0;
+	width: 150px;
+	height: 50px;
+	border: none;
+
+	/*outline: none;*/
+	cursor: pointer;
+	background: #ffc107;
+	color: #fff;
+}
+input[type="Submit"]:hover{
+	background: #ff5722;
+}
+
+.container{
+	color: white;
+}
+
+	</style>
+
+{% block content %}
+<body>
+	<div class="box">
+		<h2>Search for books:</h2>
+		 <form action="" method="post">
+		 	<input type="text" placeholder="Search by ISBN, Author,title of book..." size="30">
+		 	<input type="submit" value="search" >
+		 </form>
+
+		 <main>
+		 		<div class='container'>
+		 				<h3 class='text-center'>{{ message }}</h3>
+
+		 				<div class="list-group">
+		 						{% for x in data %}
+		 						<a href='/isbn/{{x.isbn}}' class="list-group-item list-group-item-action">
+		 								<h5 class='text-primary'>{{x.title}}</h5>
+		 								 by {{x.author}} in {{x.year}}
+		 								 <h6 class='float-right'>isbn: {{x.isbn}}</h6></a>
+		 						{% endfor %}
+		 				</div>
+		 		</div>
+		 </main>
+	</div>
+
+</body>
+{% endblock %}

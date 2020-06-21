@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block header %}
+<h1>{% block title %} Login {% endblock %}</h1>
+{% endblock %}
+
+  {% block content %}
+    <body class="login">
+    <div class="center">
+      <h2> Login </h2>
+      {% if error %}
+         <p><strong>Error:</strong> {{ error }}
+      {% endif %}
+
+      <form action="" method="POST">
+        <div class="txt_field">
+          <input name="username" id="username" value="{{request.form.username}}"  required>
+          <label for="username">Username</label>
+        </div>
+
+        <div class="txt_field">
+          <input type="password" name="password" id="password" required>
+          <label for="password">Password</label>
+        </div>
+
+        <div class="pass">Forgot Password?</div>
+        <input type="submit" value="Login">
+
+        <div class="Registration_link">
+          Not <a href="{{url_for('register')}}"> Register </a> yet?
+
+        </div>
+
+      </form>
+
+  </div>
+
+  </body>
+
+{% endblock %}
